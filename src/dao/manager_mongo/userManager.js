@@ -1,4 +1,4 @@
-import { isValidPassword } from "../../utils/crypt.js";
+import { isValidPassword } from "../../utils.js";
 import UserSchema from "../models/user.schema.js";
 
 class UserManager {

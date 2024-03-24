@@ -1,10 +1,10 @@
 import express from "express";
 import UserManager from "../dao/manager_mongo/userManager.js";
-import { createHash, isValidPassword } from "../utils/crypt.js";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import userSchema from "../dao/models/user.schema.js";
 import config from "../config/config.js";
+import { createHash } from "../utils.js";
 
 // import { requireJwtAuth } from "../config/passport.config.js";
 

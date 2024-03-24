@@ -26,7 +26,7 @@ import routerCarts from "./routes/carts.router.js";
 import routerSession from "./routes/sessions.router.js";
 import routerViews from "./routes/views.router.js";
 
-import __dirname from "./utils.js";
+import { __dirname } from "./utils.js";
 import initializePassport from "./config/passport.config.js";
 import config from "./config/config.js";
 import { Command } from "commander";

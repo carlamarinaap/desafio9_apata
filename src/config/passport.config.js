@@ -4,10 +4,10 @@ import StrategyGitHub from "passport-github2";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import userManager from "../dao/manager_mongo/userManager.js";
 import cartManager from "../dao/manager_mongo/cartsManager.js";
-import { createHash } from "../utils/crypt.js";
 import userSchema from "../dao/models/user.schema.js";
 import jwt from "jsonwebtoken";
 import config from "./config.js";
+import { createHash } from "../utils.js";
 
 const um = new userManager();
 const cm = new cartManager();

@@ -1,11 +1,10 @@
 import express from "express";
-import ProductManager from "../dao/manager_mongo/productManager.js";
-import MessageManager from "../dao/manager_mongo/messageManager.js";
-import CartsManager from "../dao/manager_mongo/cartsManager.js";
-import UserManager from "../dao/manager_mongo/userManager.js";
+import ProductManager from "../dao/controllers/productManager.js";
+import MessageManager from "../dao/controllers/messageManager.js";
+import CartsManager from "../dao/controllers/cartsManager.js";
 import jwt from "jsonwebtoken";
 import userSchema from "../dao/models/user.schema.js";
-import { config } from "dotenv";
+import config from "../config/config.js";
 
 const router = express.Router();
 const pm = new ProductManager();
@@ -47,7 +46,6 @@ router.get("/products", async (req, res) => {
   if (req.signedCookies.jwt) {
     const userId = jwt.verify(req.signedCookies.jwt, config.privateKey).id;
     user = await userSchema.findById(userId);
-    delete user.password;
   } else {
     user = req.session.user;
   }
@@ -88,7 +86,7 @@ router.get("/faillogin", async (req, res) => {
 });
 
 router.get("/login", async (req, res) => {
-  if (req.signedCookies) {
+  if (req.signedCookies.jwt) {
     res.redirect("/products");
   } else {
     res.render("login");
@@ -97,15 +95,10 @@ router.get("/login", async (req, res) => {
 
 router.get("/profile", async (req, res) => {
   let user;
-  // if (!req.session.user) {
-  const userId = jwt.verify(req.signedCookies.jwt, PRIVATE_KEY).id;
+  const userId = jwt.verify(req.signedCookies.jwt, config.privateKey).id;
   user = await userSchema.findById(userId);
-  delete user.password;
-  // } else {
-  //   user = req.session.user;
-  // }
 
-  if (req.signedCookies) {
+  if (req.signedCookies.jwt) {
     res.render("profile", user);
   } else {
     let msg = "Inicie sesión para ver su perfil";

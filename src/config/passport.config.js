@@ -2,12 +2,12 @@ import passport from "passport";
 import { Strategy } from "passport-local";
 import StrategyGitHub from "passport-github2";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
-import userManager from "../dao/manager_mongo/userManager.js";
-import cartManager from "../dao/manager_mongo/cartsManager.js";
+import userManager from "../dao/controllers/userManager.js";
+import cartManager from "../dao/controllers/cartsManager.js";
 import userSchema from "../dao/models/user.schema.js";
 import jwt from "jsonwebtoken";
 import config from "./config.js";
-import { createHash } from "../utils.js";
+import { port } from "../app.js";
 
 const um = new userManager();
 const cm = new cartManager();
@@ -49,7 +49,7 @@ passport.use(
 
 export const requireJwtAuth = passport.authenticate("jwt", { session: false });
 export const generateToken = (user) => {
-  let token = jwt.sign({ id: user._id }, PRIVATE_KEY, { expiresIn: "24h" });
+  let token = jwt.sign({ id: user._id }, config.privateKey, { expiresIn: "24h" });
   return token;
 };
 
@@ -100,7 +100,7 @@ const initializePassport = () => {
           last_name,
           age,
           email: username,
-          password: createHash(password),
+          password,
           cart: newCart[0]._id,
         };
         await um.addUser(user);
@@ -117,7 +117,7 @@ const initializePassport = () => {
       {
         clientID: "Iv1.6d1c1b3a5778cb34",
         clientSecret: "551f13b31eb6eb2b526ac1cf0ca51af93a564b4c",
-        callbackURL: "http://localhost:8080/api/sessions/githubcallbackapata",
+        callbackURL: `http://localhost:${port}/api/sessions/githubcallbackapata`,
       },
       async (accessToken, refreshToken, profile, done) => {
         try {

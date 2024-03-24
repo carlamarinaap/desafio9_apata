@@ -17,8 +17,8 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 
 // Managers
-import ProductManager from "./dao/manager_mongo/productManager.js";
-import MessageManager from "./dao/manager_mongo/messageManager.js";
+import ProductManager from "./dao/controllers/productManager.js";
+import MessageManager from "./dao/controllers/messageManager.js";
 
 //Routes
 import routerProducts from "./routes/products.router.js";
@@ -38,10 +38,9 @@ program
 program.parse();
 
 const app = express();
+export let port = program.opts().p;
 
-const httpServer = app.listen(program.opts().p, () =>
-  console.log("Server running in port " + program.opts().p)
-);
+const httpServer = app.listen(port, () => console.log("Server running in port " + port));
 const socketServer = new Server(httpServer);
 
 //app.use(express.json());
@@ -49,9 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(config.privateKey));
 
 //Database
-mongoose.connect(
-  "mongodb+srv://carlaapata:Facundo1990@cluster0.ppztezy.mongodb.net/ecommerce?retryWrites=true&w=majority"
-);
+mongoose.connect(config.mongoUrl);
 
 initializePassport();
 app.use(

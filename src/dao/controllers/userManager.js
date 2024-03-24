@@ -1,9 +1,11 @@
-import { isValidPassword } from "../../utils.js";
+import passport from "passport";
+import { createHash, isValidPassword } from "../../utils.js";
 import UserSchema from "../models/user.schema.js";
 
 class UserManager {
   addUser = async (user) => {
     try {
+      user.password = createHash(user.password);
       return await new UserSchema(user).save();
     } catch (error) {
       throw new Error(`Error al agregar el usuario: ${error.message}`);
@@ -34,7 +36,7 @@ class UserManager {
     try {
       await UserSchema.findOneAndUpdate(
         { email: email },
-        { $set: { password: password } },
+        { $set: { password: createHash(password) } },
         { new: true }
       );
     } catch (error) {

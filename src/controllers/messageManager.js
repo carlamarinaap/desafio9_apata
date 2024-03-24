@@ -1,4 +1,4 @@
-import MessageSchema from "../models/message.schema.js";
+import MessageSchema from "../dao/message.schema.js";
 
 class MessageManager {
   getMessages = async () => {

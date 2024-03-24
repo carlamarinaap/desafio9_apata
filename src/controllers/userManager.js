@@ -1,6 +1,5 @@
-import passport from "passport";
-import { createHash, isValidPassword } from "../../utils.js";
-import UserSchema from "../models/user.schema.js";
+import { createHash, isValidPassword } from "../utils.js";
+import UserSchema from "../dao/user.schema.js";
 
 class UserManager {
   addUser = async (user) => {

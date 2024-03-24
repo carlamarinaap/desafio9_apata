@@ -1,8 +1,8 @@
 import express from "express";
-import UserManager from "../dao/controllers/userManager.js";
+import UserManager from "../controllers/userManager.js";
 import passport from "passport";
 import jwt from "jsonwebtoken";
-import userSchema from "../dao/models/user.schema.js";
+import userSchema from "../dao/user.schema.js";
 import config from "../config/config.js";
 
 const um = new UserManager();

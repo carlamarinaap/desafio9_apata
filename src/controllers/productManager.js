@@ -1,6 +1,6 @@
 /* --------------CAPA DE NEGOCIO---------------- */
 
-import ProductSchema from "../models/product.schema.js";
+import ProductSchema from "../dao/product.schema.js";
 
 class ProductManager {
   getProducts = async (limit = 10, page = 1, sort, category, stock) => {

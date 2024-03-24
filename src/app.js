@@ -17,8 +17,8 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 
 // Managers
-import ProductManager from "./dao/controllers/productManager.js";
-import MessageManager from "./dao/controllers/messageManager.js";
+import ProductManager from "./controllers/productManager.js";
+import MessageManager from "./controllers/messageManager.js";
 
 //Routes
 import routerProducts from "./routes/products.router.js";

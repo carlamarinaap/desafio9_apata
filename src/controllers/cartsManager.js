@@ -1,7 +1,7 @@
 /* --------------CAPA DE NEGOCIO---------------- */
 
-import CartSchema from "../models/cart.schema.js";
-import ProductSchema from "../models/product.schema.js";
+import CartSchema from "../dao/cart.schema.js";
+import ProductSchema from "../dao/product.schema.js";
 
 class CartsManager {
   getCarts = async () => {

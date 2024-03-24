@@ -1,9 +1,9 @@
 import express from "express";
-import ProductManager from "../dao/controllers/productManager.js";
-import MessageManager from "../dao/controllers/messageManager.js";
-import CartsManager from "../dao/controllers/cartsManager.js";
+import ProductManager from "../controllers/productManager.js";
+import MessageManager from "../controllers/messageManager.js";
+import CartsManager from "../controllers/cartsManager.js";
 import jwt from "jsonwebtoken";
-import userSchema from "../dao/models/user.schema.js";
+import userSchema from "../dao/user.schema.js";
 import config from "../config/config.js";
 
 const router = express.Router();
